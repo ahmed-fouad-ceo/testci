@@ -1,0 +1,25 @@
+name: Security Checks
+
+on:
+  push:
+    branches:
+      - main  # Modify this branch name according to your project's main branch
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Choose the appropriate Node.js version for your project
+
+      - name: Install dependencies
+        run: npm install  # Modify this command for your project's dependency manager
+
+      - name: Run security checks with Snyk
+        run: npx snyk test
